@@ -1,0 +1,244 @@
+Person.__proto__===Function.prototype
+ true
+Person.__proto__.__proto__===Object.prototype;
+ true
+Person.__proto__.__proto__.__proto__
+  null
+function Person (name,age){
+	this.name=name;
+	this.age=age;
+}
+Person.prototype.sayHi=function(){
+	console.log(this.name,this.age);
+}
+var p=new Person('hh',100);
+p.sayHi();
+
+
+
+
+js中的this
+
+arr.foreach i代表索引 代码为两个数组中的最大值传到数组3上
+var arr1= [2,5,8];
+var arr2=[1,6,7];
+var arr3=[];
+arr1.forEach(function (a,i) {
+    console.log(a,i,this);
+	arr3[i]=a>arr2[i]?a:arr2[i];
+},arr2.this);
+console.log(arr3);
+
+
+正则表达式
+转义字符
+\s : 空格
+\S : 非空格
+\d : 数字
+\D : 非数字
+\w : 字符 ( 字母 ，数字，下划线_ )
+\W : 非字符
+.（点）——任意字符
+\. : 真正的点
+\b : 独立的部分 （ 起始，结束，空格 ） 边界
+\B : 非独立的部分
+^是以谁为起始
+$以谁结束
+
+3.
+function httpString(s) {
+        var reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+        //var reg = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+        //var reg=/(http(s)?\:\/\/)?(www\.)?(\w+\:\d+)?(\/\w+)+\.(swf|gif|jpg|bmp|jpeg)/gi;
+        //var reg=/(http(s)?\:\/\/)?(www\.)?(\w+\:\d+)?(\/\w+)+\.(swf|gif|jpg|bmp|jpeg)/gi;
+        var reg= /(https?|http|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/g;
+        //var reg= /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/;
+        //v = v.replace(reg, "<a href='$1$2'>$1$2</a>"); //这里的reg就是上面的正则表达式
+        //s = s.replace(reg, "$1$2"); //这里的reg就是上面的正则表达式
+        s = s.match(reg);
+        console.log(s)
+        return(s)
+    }
+
+
+1.
+var s1 = "dgfhfgh254bhku289fgdhdy675gfh";
+
+console.log(s1.match(/\d+/g));
+2.
+function combo(msg){
+    
+var arr=msg.split("-");   
+   
+ for(var i=1;i<arr.length;i++){
+
+arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1);
+    
+}
+   
+ msg=arr.join("");         
+    
+return msg;
+}
+
+var s2 = "get-element-by-id";
+
+combo(s2);
+3.
+function httpString(s) {
+       
+ var reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;      
+       
+ s = s.match(reg);
+       
+ return(s)
+    }
+
+var s3 = "测试<a href = http://www.baidu.com/>笔试</a> <a href = http://www.edu2act.cn/>笔试</a>正则";
+
+httpString(s3);
+
+
+for(var i=1;i<=3;i++){
+(function(i){
+	setTimeout(function(){
+		console.log(i);
+},0);
+}(i));
+} //123
+for(var i=1;i<=3;i++){
+	setTimeout(function(){
+		
+console.log(i);
+},0);
+};//444
+function add(a,b){this(a,b);console.log(a+b);}
+function sub(a,b){console.log(a-b);}
+var arr=[3,1];
+add.apply(sub,arr); //2 4
+
+
+js视频 事件
+1.事件流：描述的是从页面中接受事件的顺序
+  冒泡事件流：  
+	事件冒泡：事件最开始由最具体的元素（文档中嵌套层次最深的那个节点）接收，然	后逐级向上传播至最不具体的那个节点（文档）
+  事件捕获流
+	事件捕获:不太具体的节点应该更早接收到事件，而最具体的节点最后接收到事件
+2.事件处理程序
+  （1）HTML事件处理程序：直接添加再HTML中，直接添加函数或事件
+	HTML和js代码紧密耦合在一起，都需要进行修改
+  （2）DOM0级事件处理程序：较传统的方式，把一个函数赋值给一个事件的处理程序属性
+        简单，跨浏览器
+  （3）DOM2级事件处理程序：
+	用于处理指定和删除事件处理程序的操作
+	addEventListener（）和removeEventListener（） dispatchEvent（）
+	事件监听程序，不加on   删除 相同参数
+      接收三个参数：要处理的事件名、作为事件处理程序的函数（所触发的操作）和布尔值
+  （4）IE事件处理程序及跨浏览器解决 ：
+	attachEvent（）添加事件 detachEvent删除事件 加on
+	接收两个相同参数：事件处理程序的名称和事件处理程序的函数（只支持事件冒泡）
+3.事件对象
+  （1）DOM中的事件对象：
+	type属性：用于获取事件类型   click之类
+	target属性 用于获取事件目标  
+	stopPropagation( )方法 用于阻止事件冒泡 
+		冒泡：点击这个按钮的同时也同时触发这个盒子
+	preventDefault()方法，阻止事件的默认行为 
+		比如：<a href='#'>超链接</a>默认跳转
+  （2）IE中的事件对象 
+	type属性用于获取事件类型
+	srcElement属性 用于获取事件的目标
+	cancelBubble属性 用于阻止事件冒泡 true为阻止冒泡 false不阻止冒泡
+	returnValue属性 用于阻止事件的默认行为
+
+b 1 2 d    t t/f f t
+d b 2 1    f f   t t
+b 2 1 d    
+
+AJAX （js和XML）
+1.Ajax是一种无需重新加载整个网页的情况之下能够更新部分网页的技术，可以进行异步局部  事件更新
+2.HTTP是无状态协议  
+3.一个完整的HTTP请求，七个步骤：
+	建立TCP连接
+	web浏览器向web服务器发送请求命令
+	web浏览器发送请求头信息
+	web服务器应答
+	web服务器发送应答头信息
+	web服务器向浏览器发送数据
+	web服务器关闭TCP连接
+4.HTTP请求由四部分组成：
+	HTTP请求的方法或动作，比如是get或post请求
+	正在请求的url，总得知道请求的地址是什么
+	请求头，包含一些客户端环境信息，身份验证信息等
+	请求体，也就是请求正文，请求正文中可以包含客户提交的查询字符串信息，表单信      息等
+5.get请求，一般用于获取信息，使用URL传递参数。对发送信息的数量也有限制
+  post请求，一般用于修改服务器上的资源。对发送信息的数量无限制
+6.HTTP响应由三部分组成
+	一个数字和文字组成的状态码，显示请求成功或失败
+	响应头，服务器类型、日期事件、内容类型和长度
+	响应体，也就是响应正文
+7.open(method,url,async)  send（string）
+
+
+Node.js
+1.版本 偶数位为稳定版本
+2.http一种协议 
+	chrome先搜索自身DNS缓存
+	搜索操作系统自身的DNS缓存（浏览器没有找到缓存或者缓存失效）
+	读取本地的HOST文件
+	浏览器发起一个DNS的一个系统调用
+
+解构赋值
+1.判断null===undefined
+2.var [m4 = n4, n4 = 1] = [];
+console.log(m4,n4); //undefined 1 变量提升	
+3.undefined和null
+function example() {
+    return {
+        foo: undefined,
+        bar: null
+    };
+}
+var { foo=1, bar=2 } = example();
+console.log(foo,bar)  //1  null
+
+内置对象的额扩展
+1.以。。开头的正则：
+var reg1=/^hello/gi;
+var reg2=/\bhello/gi;
+"hello world".replace(reg1,'*'); 
+reg1.exec('hello world');       reg1.test('hello world')
+
+浅拷贝指向同一内存空间
+深拷贝是两个内存空间，值和引用 结构都相同
+
+var obj1={a:1,b:2};
+var obj2={c:3,d:4};
+Object.setPrototypeOf(obj2,obj1);
+console.log(obj2.a,obj2.b,obj2.c,obj2.d);
+var obj1={a:1,b:2};
+var obj2=Object.create(obj1);
+obj2.c=3;
+obj2.d=4;
+console.log(obj2.a,obj2.b,obj2.c,obj2.d);  Object.keys(obj2);//自身的
+
+
+Object.entries()相当于返回的是一个二维数组
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
