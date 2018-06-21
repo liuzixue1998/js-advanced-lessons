@@ -225,6 +225,11 @@ console.log(obj2.a,obj2.b,obj2.c,obj2.d);  Object.keys(obj2);//自身的
 
 Object.entries()相当于返回的是一个二维数组
 
+去重
+var set=new set([1,2,,3,3,3,3,4.4.5,5,]);
+console.log([...set])
+
+
 
 
 
