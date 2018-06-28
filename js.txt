@@ -229,8 +229,45 @@ Object.entries()相当于返回的是一个二维数组
 var set=new set([1,2,,3,3,3,3,4.4.5,5,]);
 console.log([...set])
 
+静态方法：
+class Foo{
+	static classMethod(){
+		console.log(this);
+		return 'hello';
+}
+}
+Foo.classMethod();
+var foo=new Foo();
+Foo.secondMethod=function(){console.log('hh')}; Foo instanceof Function;
+给任何构造函数扩展静态方法
+Object.staticMethod=()=>{console.log(123)};
+Object.prototype.instanceofMethod=()=>{console.log(345)};
+var obj=new Object;
 
+prototype  __proto__
 
+new Promise((resolve,reject)=>{
+	setTimeout(resolve,2000,'xx')
+}).then(
+	()=>{},
+	()=>{}
+)
+
+new Promise((resolve,reject)=>{
+	//setTimeout(resolve,2000,'xx')
+	setTimeout(()=>{resolve("xx")},2000);
+}).then(
+	(val)=>{console.log("val",val)},//成功
+	(err)=>{console.log("err",err)}//失败
+)
+
+new Promise((resolve,reject)=>{
+	//setTimeout(resolve,2000,'xx')
+	setTimeout(()=>{reject("xx")},2000);
+}).then(
+	(val)=>{console.log("val",val)},//成功
+	(err)=>{console.log("err",err)}//失败
+)
 
 
 
